@@ -1,7 +1,10 @@
 package com.market.backend.market.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -19,12 +22,42 @@ public class Zamowienia {
     @JoinColumn(name = "klienci_id", nullable = false, unique = true)
     private Klienci klienci;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "adres_id", nullable = false)
-    private Adres adres;
-
     @OneToMany(mappedBy = "zamowienia", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<ZamowieniaIlosc> zamowieniaIlosci = new ArrayList<>();
+
+    @Column(name = "kwota", nullable = false)
+    private Double kwota;
+
+    @Column(name = "data_zamowienia", nullable = false)
+    private LocalDateTime dataZamowienia;
+
+    @Column(name = "czy_zamowienie_zrealizowano", nullable = false)
+    @JdbcTypeCode(SqlTypes.BOOLEAN)
+    private Boolean czy_zamowienie_zrealizowano = false;
+
+    public Boolean getCzy_zamowienie_zrealizowano() {
+        return czy_zamowienie_zrealizowano;
+    }
+
+    public void setCzy_zamowienie_zrealizowano(Boolean czy_zamowienie_zrealizowano) {
+        this.czy_zamowienie_zrealizowano = czy_zamowienie_zrealizowano;
+    }
+
+    public LocalDateTime getDataZamowienia() {
+        return dataZamowienia;
+    }
+
+    public void setDataZamowienia(LocalDateTime dataZamowienia) {
+        this.dataZamowienia = dataZamowienia;
+    }
+
+    public Double getKwota() {
+        return kwota;
+    }
+
+    public void setKwota(Double kwota) {
+        this.kwota = kwota;
+    }
 
     public List<ZamowieniaIlosc> getZamowieniaIlosci() {
         return zamowieniaIlosci;
@@ -34,13 +67,7 @@ public class Zamowienia {
         this.zamowieniaIlosci = zamowieniaIlosci;
     }
 
-    public Adres getAdres() {
-        return adres;
-    }
 
-    public void setAdres(Adres adres) {
-        this.adres = adres;
-    }
 
     public Klienci getKlienci() {
         return klienci;
