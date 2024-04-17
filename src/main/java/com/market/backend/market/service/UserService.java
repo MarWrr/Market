@@ -22,12 +22,14 @@ public class UserService {
             || localUserDAO.findByLoginIgnoreCase(registrationBody.getLogin()).isPresent()){
           throw new UserAlreadyExistException();
         }
+
         Klienci klient = new Klienci();
         klient.setEmail(registrationBody.getEmail());
         klient.setImie(registrationBody.getImie());
         klient.setNazwisko(registrationBody.getNazwisko());
         //ENKRYPCJA HASEL - zrobic
         klient.setHaslo(registrationBody.getHaslo());
+
         return localUserDAO.save(klient);
     }
 
