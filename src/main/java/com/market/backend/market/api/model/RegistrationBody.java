@@ -37,7 +37,7 @@ public class RegistrationBody {
         return email;
     }
 
-    public  String getImie() {
+    public String getImie() {
         return imie;
     }
 

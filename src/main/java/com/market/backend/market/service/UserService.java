@@ -1,36 +1,55 @@
 package com.market.backend.market.service;
 
+import com.market.backend.market.api.model.LoginBody;
 import com.market.backend.market.api.model.RegistrationBody;
 import com.market.backend.market.exception.UserAlreadyExistException;
-import com.market.backend.market.model.Klienci;
+import com.market.backend.market.model.Users;
 import com.market.backend.market.model.dao.LocalUserDAO;
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
 
     private LocalUserDAO localUserDAO;
+    private EncryptionService encryptionService;
+    private JWTService jwtService;
 
-    public UserService(LocalUserDAO localUserDAO) {
+    public UserService(LocalUserDAO localUserDAO, EncryptionService encryptionService, JWTService jwtService) {
         this.localUserDAO = localUserDAO;
+        this.encryptionService = encryptionService;
+        this.jwtService = jwtService;
     }
 
-    public Klienci registerUser(RegistrationBody registrationBody) throws UserAlreadyExistException {
+    public Users registerUser(RegistrationBody registrationBody) throws UserAlreadyExistException {
 
         if (localUserDAO.findByEmailIgnoreCase(registrationBody.getEmail()).isPresent()
             || localUserDAO.findByLoginIgnoreCase(registrationBody.getLogin()).isPresent()){
           throw new UserAlreadyExistException();
         }
 
-        Klienci klient = new Klienci();
+        Users klient = new Users();
+        klient.setLogin(registrationBody.getLogin());
         klient.setEmail(registrationBody.getEmail());
-        klient.setImie(registrationBody.getImie());
-        klient.setNazwisko(registrationBody.getNazwisko());
-        //ENKRYPCJA HASEL - zrobic
-        klient.setHaslo(registrationBody.getHaslo());
+        klient.setName(registrationBody.getImie());
+        klient.setSurname(registrationBody.getNazwisko());
+
+        klient.setPassword(encryptionService.encryptPassword(registrationBody.getHaslo()));
 
         return localUserDAO.save(klient);
     }
+
+    public String loginUser(LoginBody loginBody){
+        Optional<Users> opUser = localUserDAO.findByLoginIgnoreCase(loginBody.getUsername());
+        if(opUser.isPresent()) {
+            Users user = opUser.get();
+            if(encryptionService.verifyPassword(loginBody.getPassword(), user.getPassword())){
+                return jwtService.generateJWT(user);
+            }
+        }
+        return null;
+    }
+
 
 }
