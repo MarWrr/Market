@@ -29,15 +29,15 @@ public class UserService {
           throw new UserAlreadyExistException();
         }
 
-        Users klient = new Users();
-        klient.setLogin(registrationBody.getLogin());
-        klient.setEmail(registrationBody.getEmail());
-        klient.setName(registrationBody.getImie());
-        klient.setSurname(registrationBody.getNazwisko());
+        Users client = new Users();
+        client.setLogin(registrationBody.getLogin());
+        client.setEmail(registrationBody.getEmail());
+        client.setName(registrationBody.getName());
+        client.setSurname(registrationBody.getSurname());
 
-        klient.setPassword(encryptionService.encryptPassword(registrationBody.getHaslo()));
+        client.setPassword(encryptionService.encryptPassword(registrationBody.getPassword()));
 
-        return localUserDAO.save(klient);
+        return localUserDAO.save(client);
     }
 
     public String loginUser(LoginBody loginBody){

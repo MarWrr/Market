@@ -43,8 +43,8 @@ public class Users {
         return surname;
     }
 
-    public void setSurname(String nazwisko) {
-        this.surname = nazwisko;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getName() {
