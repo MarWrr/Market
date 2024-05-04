@@ -5,14 +5,14 @@ import com.market.backend.market.api.model.LoginBody;
 import com.market.backend.market.api.model.LoginResponse;
 import com.market.backend.market.api.model.RegistrationBody;
 import com.market.backend.market.exception.UserAlreadyExistException;
+import com.market.backend.market.model.Users;
 import com.market.backend.market.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -45,5 +45,9 @@ public class AuthenticationController {
         }
     }
 
+    @GetMapping("/me")
+    public Users getLoggedInUserProfile(@AuthenticationPrincipal Users user){
+        return user;
+    }
 
 }
