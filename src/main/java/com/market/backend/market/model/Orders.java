@@ -1,5 +1,6 @@
 package com.market.backend.market.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -19,7 +20,7 @@ public class Orders {
     @ManyToOne(optional = false)
     @JoinColumn(name = "client_id", nullable = false, unique = true)
     private Users users;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "quantity_available", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Quantity> quantityOrder = new ArrayList<>();
 

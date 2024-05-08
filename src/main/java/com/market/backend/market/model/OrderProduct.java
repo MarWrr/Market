@@ -6,28 +6,40 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 @Entity
-@Table(name = "product_quantity")
-public class Quantity{
+@Table(name = "product_order")
+public class OrderProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @JsonIgnore
-    @OneToOne(optional = false, orphanRemoval = true)
-    @JoinColumn(name = "product_id", nullable = false, unique = true)
+    @ManyToOne
+    @JoinColumn(name = "product_id")
     private Product product;
 
-    @Column(name = "quantity_available", nullable = false)
-    @JdbcTypeCode(SqlTypes.INTEGER)
-    private Integer quantity_available;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "orders_id")
+    private Orders orders;
 
-    public Integer getQuantity_available() {
-        return quantity_available;
+    public Orders getOrders() {
+        return orders;
     }
 
-    public void setQuantity_available(Integer quantity_available) {
-        this.quantity_available = quantity_available;
+    @Column(name = "quantity", nullable = false)
+    @JdbcTypeCode(SqlTypes.INTEGER)
+    private Integer quantity;
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setOrders(Orders orders) {
+        this.orders = orders;
     }
 
     public Product getProduct() {
@@ -42,8 +54,7 @@ public class Quantity{
         return id;
     }
 
-    public void voidsetId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-
 }

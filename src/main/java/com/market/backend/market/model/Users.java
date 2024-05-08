@@ -1,5 +1,6 @@
 package com.market.backend.market.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class Users {
 
     @Column(name = "login", nullable = false, unique = true)
     private String login;
-
+    @JsonIgnore
     @Column(name = "password", nullable = false, length = 1000)
     private String password;
 
@@ -28,9 +29,11 @@ public class Users {
     @Column(name = "surname", nullable = false, length = 200)
     private String surname;
 
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Address> addresses = new ArrayList<>();
 
+    @JsonIgnore
     public List<Address> getAdress() {
         return addresses;
     }
