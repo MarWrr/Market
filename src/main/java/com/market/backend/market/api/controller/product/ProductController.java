@@ -3,11 +3,13 @@ package com.market.backend.market.api.controller.product;
 import com.market.backend.market.model.Product;
 import com.market.backend.market.service.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController("/product")
+@RestController
+@RequestMapping("/product")
 public class ProductController {
 
     private ProductService productService;

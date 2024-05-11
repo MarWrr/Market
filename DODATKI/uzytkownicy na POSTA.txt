@@ -1,0 +1,31 @@
+{
+    "login": "test1",
+    "password": "test1test",
+    "email": "test1@gmail.com",
+    "name": "Kamil",
+    "surname": "Kamilowksi"
+}
+
+{
+    "login": "jan_kowalski",
+    "password": "password123",
+    "email": "jan.kowalski@example.com",
+    "name": "Jan",
+    "surname": "Kowalski"
+}
+
+{
+    "login": "anna_nowak",
+    "password": "pass123qwea",
+    "email": "anna.nowak@example.com",
+    "name": "Anna",
+    "surname": "Nowak"
+}
+
+{
+    "login": "piotr_wisniewski",
+    "password": "wisniewski123",
+    "email": "piotr.wisniewski@example.com",
+    "name": "Piotr",
+    "surname": "Wiśniewski"
+}

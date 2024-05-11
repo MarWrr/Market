@@ -19,11 +19,11 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @Component
-public class JWTRequestFIlter extends OncePerRequestFilter {
+public class JWTRequestFilter extends OncePerRequestFilter {
     private JWTService jwtService;
     private LocalUserDAO localUserDAO;
 
-    public JWTRequestFIlter(JWTService jwtService, LocalUserDAO localUserDAO) {
+    public JWTRequestFilter(JWTService jwtService, LocalUserDAO localUserDAO) {
         this.jwtService = jwtService;
         this.localUserDAO = localUserDAO;
     }

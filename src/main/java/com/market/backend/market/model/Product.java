@@ -1,5 +1,6 @@
 package com.market.backend.market.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<PhotoGallery> photogalleries = new ArrayList<>();
-
+    @JsonIgnore
     public List<PhotoGallery> getGaleriaZdjecs() {
         return photogalleries;
     }
