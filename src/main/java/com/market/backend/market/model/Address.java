@@ -1,5 +1,6 @@
 package com.market.backend.market.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -28,6 +29,7 @@ public class Address {
     @Column(name = "local_number", nullable = false)
     private Integer local_number;
 
+    @JsonIgnore
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private Users user;

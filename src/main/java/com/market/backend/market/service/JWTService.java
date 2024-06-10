@@ -2,6 +2,7 @@ package com.market.backend.market.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.market.backend.market.model.Users;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,6 +37,7 @@ public class JWTService {
     }
 
     public String getUsername(String token){
-        return JWT.decode(token).getClaim(USERNAME_KEY).asString();
+        DecodedJWT jwt = JWT.require(algorithm).build().verify(token);
+        return jwt.getClaim(USERNAME_KEY).asString();
     }
 }
