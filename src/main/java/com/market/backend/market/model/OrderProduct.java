@@ -14,17 +14,13 @@ public class OrderProduct {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "orders_id")
+    @JoinColumn(name = "orders_id", nullable = false)
     private Orders orders;
-
-    public Orders getOrders() {
-        return orders;
-    }
 
     @Column(name = "quantity", nullable = false)
     @JdbcTypeCode(SqlTypes.INTEGER)
@@ -40,6 +36,10 @@ public class OrderProduct {
 
     public void setOrders(Orders orders) {
         this.orders = orders;
+    }
+
+    public Orders getOrders() {
+        return orders;
     }
 
     public Product getProduct() {

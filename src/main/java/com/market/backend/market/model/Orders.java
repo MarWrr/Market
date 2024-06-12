@@ -18,11 +18,12 @@ public class Orders {
     private Long id;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "client_id", nullable = false, unique = true)
+    @JoinColumn(name = "client_id", nullable = false)
     private Users users;
+
     @JsonIgnore
-    @OneToMany(mappedBy = "quantity_available", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<Quantity> quantityOrder = new ArrayList<>();
+    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderProduct> quantityOrder = new ArrayList<>();
 
     @Column(name = "price", nullable = false)
     private Double price;
@@ -58,11 +59,11 @@ public class Orders {
         this.price = price;
     }
 
-    public List<Quantity> getQuantityOrder() {
+    public List<OrderProduct> getQuantityOrder() {
         return quantityOrder;
     }
 
-    public void setQuantityOrder(List<Quantity> quantityOrder) {
+    public void setQuantityOrder(List<OrderProduct> quantityOrder) {
         this.quantityOrder = quantityOrder;
     }
 

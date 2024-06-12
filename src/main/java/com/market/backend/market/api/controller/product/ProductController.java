@@ -1,10 +1,9 @@
 package com.market.backend.market.api.controller.product;
 
+import com.market.backend.market.api.model.ProductRequestBody;
 import com.market.backend.market.model.Product;
 import com.market.backend.market.service.ProductService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +20,10 @@ public class ProductController {
     @GetMapping
     public List<Product> getProducts() {
         return productService.getProducts();
+    }
+
+    @PostMapping("/add")
+    public Product addProduct(@RequestBody ProductRequestBody productRequest) {
+        return productService.addProduct(productRequest);
     }
 }

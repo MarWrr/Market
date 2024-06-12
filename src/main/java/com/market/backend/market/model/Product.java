@@ -31,12 +31,13 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<PhotoGallery> photogalleries = new ArrayList<>();
+
     @JsonIgnore
-    public List<PhotoGallery> getGaleriaZdjecs() {
+    public List<PhotoGallery> getPhotogalleries() {
         return photogalleries;
     }
 
-    public void setGaleriaZdjecs(List<PhotoGallery> photogalleries) {
+    public void setPhotogalleries(List<PhotoGallery> photogalleries) {
         this.photogalleries = photogalleries;
     }
 
