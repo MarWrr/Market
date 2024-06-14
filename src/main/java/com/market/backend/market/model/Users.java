@@ -29,16 +29,16 @@ public class Users {
     @Column(name = "surname", nullable = false, length = 200)
     private String surname;
 
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Address> addresses = new ArrayList<>();
 
+
     @JsonIgnore
-    public List<Address> getAdress() {
+    public List<Address> getAddress() {
         return addresses;
     }
 
-    public void setAdress(List<Address> addresses) {
+    public void setAddress(List<Address> addresses) {
         this.addresses = addresses;
     }
 

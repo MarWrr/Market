@@ -14,9 +14,8 @@ public class Quantity{
     private Long id;
 
     @JsonIgnore
-    @OneToOne(optional = false, orphanRemoval = true)
-    @JoinColumn(name = "product_id", nullable = false, unique = true)
-    private Product product;
+    @Column(name = "product_id", nullable = false, unique = true)
+    private Long productId;
 
     @Column(name = "quantity_available", nullable = false)
     @JdbcTypeCode(SqlTypes.INTEGER)
@@ -30,19 +29,19 @@ public class Quantity{
         this.quantity_available = quantity_available;
     }
 
-    public Product getProduct() {
-        return product;
+    public Long getProduct() {
+        return productId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProduct(Long productId) {
+        this.productId = productId;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void voidsetId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

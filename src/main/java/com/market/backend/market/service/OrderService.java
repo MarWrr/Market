@@ -7,10 +7,12 @@ import com.market.backend.market.model.Product;
 import com.market.backend.market.model.dao.ProductDAO;
 import com.market.backend.market.model.dao.WebOrderDAO;
 import jakarta.transaction.Transactional;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -23,7 +25,12 @@ public class OrderService {
     }
 
     @Transactional
-    public Orders makeOrder(Long productId, Integer quantity, Users user) {
+    public Orders makeOrder(Long productId, Integer quantity, @AuthenticationPrincipal Users user) {
+        System.out.println("Received productId: " + productId);
+        System.out.println("Finding product with ID: " + productId);
+        Optional<Product> productOptional = productDAO.findById(productId);
+        System.out.println("Product found: " + productOptional);
+
         Product product = productDAO.findById(productId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid product ID"));
 

@@ -10,9 +10,8 @@ public class PhotoGallery {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "product_id", unique = true)
-    private Product product;
+    @Column(name = "product_id", unique = true)
+    private Long product;
 
     @Column(name = "name_jpg", unique = true, length = 45)
     private String name_jpg;
@@ -25,11 +24,11 @@ public class PhotoGallery {
         this.name_jpg = name_jpg;
     }
 
-    public Product getProdukt() {
+    public Long getProdukt() {
         return product;
     }
 
-    public void setProdukt(Product product) {
+    public void setProdukt(Long product) {
         this.product = product;
     }
 

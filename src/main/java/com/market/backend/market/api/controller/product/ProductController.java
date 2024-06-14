@@ -2,7 +2,9 @@ package com.market.backend.market.api.controller.product;
 
 import com.market.backend.market.api.model.ProductRequestBody;
 import com.market.backend.market.model.Product;
+import com.market.backend.market.model.Users;
 import com.market.backend.market.service.ProductService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +25,8 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public Product addProduct(@RequestBody ProductRequestBody productRequest) {
-        return productService.addProduct(productRequest);
+    public Product addProduct(@RequestBody ProductRequestBody productRequest,
+                              @AuthenticationPrincipal Users user) {
+        return productService.addProduct(productRequest, user);
     }
 }

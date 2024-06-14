@@ -15,7 +15,7 @@ public class Product {
     private Long id;
 
     @Column(name = "product_name", nullable = false, unique = true)
-    private String product_name;
+    private String productName;
 
     @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     private String description;
@@ -26,28 +26,23 @@ public class Product {
     @Column(name = "photo", unique = true, length = 45)
     private String photo;
 
-    @OneToOne(mappedBy = "product", cascade = CascadeType.REMOVE, optional = false, orphanRemoval = true)
-    private Quantity quantity;
+    @Column(name = "user_id")
+    private Long userId;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<PhotoGallery> photogalleries = new ArrayList<>();
+    private List<PhotoGallery> photogalleries;
+
 
     @JsonIgnore
     public List<PhotoGallery> getPhotogalleries() {
         return photogalleries;
     }
 
+
     public void setPhotogalleries(List<PhotoGallery> photogalleries) {
         this.photogalleries = photogalleries;
     }
 
-    public Quantity getEgzemplarze() {
-        return quantity;
-    }
-
-    public void setEgzemplarze(Quantity quantity) {
-        this.quantity = quantity;
-    }
 
     public String getPhoto() {
         return photo;
@@ -74,11 +69,11 @@ public class Product {
     }
 
     public String getProduct_name() {
-        return product_name;
+        return productName;
     }
 
     public void setProduct_name(String nazwa) {
-        this.product_name = nazwa;
+        this.productName = nazwa;
     }
 
     public Long getId() {
@@ -89,4 +84,11 @@ public class Product {
         this.id = id;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 }
